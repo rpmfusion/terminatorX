@@ -1,12 +1,13 @@
 Summary:       Realtime Audio Synthesizer
 Name:          terminatorX
 Version:       3.82
-Release:       2%{?dist}.1
+Release:       2%{?dist}.2
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
 Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.gz
 Patch0:        %{name}-gcc44.patch
+Patch1:        %{name}-endian_h.patch
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: alsa-lib-devel
@@ -44,6 +45,7 @@ easy-to-use gtk+ GUI.
 %prep
 %setup -q
 %patch0 -p1 -b .gcc44
+%patch1 -p1 -b .endian
 
 # To match the freedesktop standards
 sed -i 's|\.png||' gnome-support/%{name}.desktop
