@@ -1,12 +1,14 @@
 Summary:       Realtime Audio Synthesizer
 Name:          terminatorX
 Version:       3.82
-Release:       2%{?dist}
+Release:       3%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
 Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.gz
 Patch0:        %{name}-gcc44.patch
+# To make the package buildable on ppc/ppc64:
+Patch1:        %{name}-endian_h.patch
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: alsa-lib-devel
@@ -44,6 +46,7 @@ easy-to-use gtk+ GUI.
 %prep
 %setup -q
 %patch0 -p1 -b .gcc44
+%patch1 -p1 -b .endian
 
 # To match the freedesktop standards
 sed -i 's|\.png||' gnome-support/%{name}.desktop
@@ -119,6 +122,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Apr 04 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 3.82-3
+- Fix ppc/ppc64 build failure
+
 * Wed Apr 01 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 3.82-2
 - Prepared package for RPMFusion submission (originates from planetccrma)
 
