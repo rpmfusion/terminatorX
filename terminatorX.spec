@@ -1,7 +1,7 @@
 Summary:       Realtime Audio Synthesizer
 Name:          terminatorX
 Version:       3.82
-Release:       2%{?dist}
+Release:       2%{?dist}.1
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -57,6 +57,9 @@ done
 
 %build
 %configure
+echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+cat config.log
+echo YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
 make %{?_smp_mflags}
 
 %install
