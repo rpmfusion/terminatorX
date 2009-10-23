@@ -1,7 +1,7 @@
 Summary:       Realtime Audio Synthesizer
 Name:          terminatorX
 Version:       3.82
-Release:       3%{?dist}
+Release:       4%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -77,7 +77,7 @@ mv %{buildroot}%{_datadir}/pixmaps/terminatorX-app.png %{buildroot}%{_datadir}/i
 mv %{buildroot}%{_datadir}/pixmaps/terminatorX-mime.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
 
 # desktop file categories
-ADD="Audio Midi X-Jack X-DJTools"
+ADD="Audio X-Jack X-DJTools X-DigitalProcessing Sequencer"
 REMOVE="Application"
 mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install \
@@ -122,6 +122,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Oct 23 2009 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.82-4
+- Update desktop file according to F-12 FedoraStudio feature
+
 * Sat Apr 04 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 3.82-3
 - Fix ppc/ppc64 build failure
 
