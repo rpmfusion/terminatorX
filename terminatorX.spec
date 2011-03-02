@@ -1,7 +1,7 @@
-Summary:       Realtime Audio Synthesizer
+Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       3.82
-Release:       4%{?dist}
+Version:       3.83
+Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -9,6 +9,8 @@ Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.gz
 Patch0:        %{name}-gcc44.patch
 # To make the package buildable on ppc/ppc64:
 Patch1:        %{name}-endian_h.patch
+# Fix DSO linking
+Patch2:        %{name}-linking.patch
 BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: alsa-lib-devel
@@ -37,16 +39,17 @@ Requires(post): scrollkeeper
 Requires(postun): scrollkeeper
 
 %description
-terminatorX is a realtime audio synthesizer that allows you to "scratch" on
+terminatorX is a real-time audio synthesizer that allows you to "scratch" on
 digitally sampled audio data (*.wav, *.au, *.ogg, *.mp3, etc.) the way 
-hiphop-DJs scratch on vinyl records. It features multiple turntables, realtime
-effects (buit-in as well as LADSPA plugin effects), a sequencer and an
+hiphop-DJs scratch on vinyl records. It features multiple turntables, real-time
+effects (buit-in as well as LADSPA plug-in effects), a sequencer and an
 easy-to-use gtk+ GUI.
 
 %prep
 %setup -q
 %patch0 -p1 -b .gcc44
 %patch1 -p1 -b .endian
+%patch2 -p1 -b .linking
 
 # To match the freedesktop standards
 sed -i 's|\.png||' gnome-support/%{name}.desktop
@@ -122,6 +125,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Mar 01 2011 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.83-1
+- Update to 3.83
+
 * Fri Oct 23 2009 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.82-4
 - Update desktop file according to F-12 FedoraStudio feature
 
