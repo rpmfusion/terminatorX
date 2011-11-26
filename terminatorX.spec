@@ -1,6 +1,6 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       3.83
+Version:       3.84
 Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
@@ -125,6 +125,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sat Nov 26 2011 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.84-1
+- Update to 3.84
+
 * Tue Mar 01 2011 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.83-1
 - Update to 3.83
 
