@@ -11,7 +11,8 @@ Patch0:        %{name}-gcc44.patch
 Patch1:        %{name}-endian_h.patch
 # Fix DSO linking
 Patch2:        %{name}-linking.patch
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+# Build fix against newer zlib
+Patch3:        %{name}-against-zlib1.2.7.patch
 
 BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
@@ -50,6 +51,7 @@ easy-to-use gtk+ GUI.
 %patch0 -p1 -b .gcc44
 %patch1 -p1 -b .endian
 %patch2 -p1 -b .linking
+%patch3 -p1 -b .zlib1.2.7
 
 # To match the freedesktop standards
 sed -i 's|\.png||' gnome-support/%{name}.desktop
@@ -66,7 +68,6 @@ done
 make %{?_smp_mflags}
 
 %install
-rm -rf %{buildroot}
 make install DESTDIR=%{buildroot}
 
 # install mime files
@@ -93,8 +94,6 @@ desktop-file-install \
 rm -f %{buildroot}%{_datadir}/gnome/apps/Multimedia/%{name}.desktop
 rm -rf %{buildroot}%{_var}/scrollkeeper
 
-%clean
-rm -rf %{buildroot}
 
 %post
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null
@@ -112,7 +111,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
-%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING* NEWS README* THANKS TODO 
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
@@ -125,6 +123,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Mar 24 2013 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.84-4
+- Build fix against newer zlib
+- Spec file cleanup
+
 * Sun Mar 03 2013 Nicolas Chauvet <kwizart@gmail.com> - 3.84-3
 - Mass rebuilt for Fedora 19 Features
 
