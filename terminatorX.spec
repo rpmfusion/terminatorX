@@ -1,23 +1,17 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       3.84
-Release:       5%{?dist}
+Version:       3.90
+Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
-Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.gz
-Patch0:        %{name}-gcc44.patch
-# To make the package buildable on ppc/ppc64:
-Patch1:        %{name}-endian_h.patch
-# Fix DSO linking
-Patch2:        %{name}-linking.patch
-# Build fix against newer zlib
-Patch3:        %{name}-against-zlib1.2.7.patch
+Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.bz2
 
 BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
 BuildRequires: desktop-file-utils
 BuildRequires: gnome-libs-devel
+BuildRequires: gnome-doc-utils
 BuildRequires: gtk2-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
@@ -32,6 +26,7 @@ BuildRequires: scrollkeeper
 BuildRequires: sox
 BuildRequires: vorbis-tools 
 
+Requires:      hicolor-icon-theme
 Requires:      mpg321
 Requires:      sox
 Requires:      vorbis-tools
@@ -48,51 +43,26 @@ easy-to-use gtk+ GUI.
 
 %prep
 %setup -q
-%patch0 -p1 -b .gcc44
-%patch1 -p1 -b .endian
-%patch2 -p1 -b .linking
-%patch3 -p1 -b .zlib1.2.7
 
-# To match the freedesktop standards
-sed -i 's|\.png||' gnome-support/%{name}.desktop
-
-# Fix encoding
-for file in AUTHORS ChangeLog README; do
-   iconv -f iso8859-1 -t utf8 $file -o $file.tmp
-   touch -r $file $file.tmp
-   mv -f $file.tmp $file
-done
+# Fix Ladspa path
+sed -i 's|/lib/|/%{_lib}/|g' src/tX_ladspa.cc
 
 %build
+export GREP_OPTIONS=
 %configure
 make %{?_smp_mflags}
 
 %install
 make install DESTDIR=%{buildroot}
 
-# install mime files
-mkdir -p %{buildroot}%{_datadir}/mime-info
-install -pm 0644 gnome-support/terminatorX.keys %{buildroot}%{_datadir}/mime-info
-install -pm 0644 gnome-support/terminatorX.mime %{buildroot}%{_datadir}/mime-info
-
-# move icons to the proper freedesktop location
-mkdir -p %{buildroot}%{_datadir}/icons/hicolor/48x48/apps
-mv %{buildroot}%{_datadir}/pixmaps/terminatorX-app.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
-mv %{buildroot}%{_datadir}/pixmaps/terminatorX-mime.png %{buildroot}%{_datadir}/icons/hicolor/48x48/apps/
-
 # desktop file categories
 ADD="Audio X-Jack X-DJTools X-DigitalProcessing Sequencer"
 REMOVE="Application"
-mkdir -p %{buildroot}%{_datadir}/applications
 desktop-file-install \
   --dir %{buildroot}%{_datadir}/applications \
   `for c in ${ADD}    ; do echo "--add-category $c "    ; done` \
   `for c in ${REMOVE} ; do echo "--remove-category $c " ; done` \
-  gnome-support/%{name}.desktop
-
-# we don't need to package these
-rm -f %{buildroot}%{_datadir}/gnome/apps/Multimedia/%{name}.desktop
-rm -rf %{buildroot}%{_var}/scrollkeeper
+  %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 
 %post
@@ -114,15 +84,18 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %doc AUTHORS ChangeLog COPYING* NEWS README* THANKS TODO 
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
-%{_datadir}/%{name}/
 %{_datadir}/mime-info/%{name}.keys
 %{_datadir}/mime-info/%{name}.mime
 %{_datadir}/omf/*/*
-%{_datadir}/icons/hicolor/48x48/apps/*png
+%{_datadir}/icons/hicolor/48x48/*/*png
+%{_datadir}/pixmaps/%{name}.xpm
 %{_datadir}/applications/%{name}.desktop
-
+%{_datadir}/gnome/help/%{name}-manual/
 
 %changelog
+* Thu Feb 13 2014 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.90-1
+- Update to 3.90
+
 * Sun Dec 08 2013 Nicolas Chauvet <kwizart@gmail.com> - 3.84-5
 - Rebuilt
 
@@ -205,10 +178,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 * Wed Feb 23 2000 Adrian Reber <adrian@42.fht-esslingen.de>
  - Mandrake adaptations.
 
-* Thu Feb 14 2000 Adrian Reber <adrian@42.fht-esslingen.de>
+* Mon Feb 14 2000 Adrian Reber <adrian@42.fht-esslingen.de>
  - Updated to 3.55
 
-* Thu Dec 17 1999 Adrian Reber <adrian@42.fht-esslingen.de>
+* Fri Dec 17 1999 Adrian Reber <adrian@42.fht-esslingen.de>
  - Updated to 3.5
 
 * Thu Jul 29 1999 Adrian Reber <adrian@rhlx01.fht-esslingen.de>
