@@ -1,7 +1,7 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
 Version:       3.90
-Release:       1%{?dist}
+Release:       2%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -93,6 +93,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/gnome/help/%{name}-manual/
 
 %changelog
+* Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 3.90-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Thu Feb 13 2014 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 3.90-1
 - Update to 3.90
 
