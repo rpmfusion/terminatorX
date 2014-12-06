@@ -1,7 +1,7 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
 Version:       3.90
-Release:       2%{?dist}
+Release:       3%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -21,13 +21,13 @@ BuildRequires: libmad-devel
 BuildRequires: libvorbis-devel 
 BuildRequires: libxml2-devel
 BuildRequires: libXxf86dga-devel 
-BuildRequires: mpg321
+BuildRequires: libmpg123-devel, mpg123
 BuildRequires: scrollkeeper
 BuildRequires: sox
 BuildRequires: vorbis-tools 
 
 Requires:      hicolor-icon-theme
-Requires:      mpg321
+Requires:      mpg123
 Requires:      sox
 Requires:      vorbis-tools
 
@@ -93,6 +93,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/gnome/help/%{name}-manual/
 
 %changelog
+* Sat Dec 06 2014 Nicolas Chauvet <kwizart@gmail.com> - 3.90-3
+- Switch to mpg123
+
 * Mon Sep 01 2014 Sérgio Basto <sergio@serjux.com> - 3.90-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
