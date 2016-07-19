@@ -13,7 +13,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
 BuildRequires: gnome-libs-devel
 BuildRequires: gnome-doc-utils
-BuildRequires: gtk2-devel
+BuildRequires: gtk3-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: libcap-devel
@@ -94,6 +94,7 @@ fi
 %changelog
 * Tue Jul 19 2016 Leigh Scott <leigh123linux@googlemail.com> - 4.0.0-1
 - Update to 4.0.0
+- Change from gtk2 to gtk3
 
 * Sat Dec 06 2014 Nicolas Chauvet <kwizart@gmail.com> - 3.90-3
 - Switch to mpg123
