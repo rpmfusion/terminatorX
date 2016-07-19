@@ -1,7 +1,7 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       3.90
-Release:       3%{?dist}
+Version:       4.0.0
+Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -10,6 +10,7 @@ Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.bz2
 BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
 BuildRequires: desktop-file-utils
+BuildRequires: libappstream-glib
 BuildRequires: gnome-libs-devel
 BuildRequires: gnome-doc-utils
 BuildRequires: gtk2-devel
@@ -22,7 +23,7 @@ BuildRequires: libvorbis-devel
 BuildRequires: libxml2-devel
 BuildRequires: libXxf86dga-devel 
 BuildRequires: libmpg123-devel, mpg123
-BuildRequires: scrollkeeper
+BuildRequires: rarian-compat
 BuildRequires: sox
 BuildRequires: vorbis-tools 
 
@@ -30,9 +31,6 @@ Requires:      hicolor-icon-theme
 Requires:      mpg123
 Requires:      sox
 Requires:      vorbis-tools
-
-Requires(post): scrollkeeper
-Requires(postun): scrollkeeper
 
 %description
 terminatorX is a real-time audio synthesizer that allows you to "scratch" on
@@ -64,35 +62,39 @@ desktop-file-install \
   `for c in ${REMOVE} ; do echo "--remove-category $c " ; done` \
   %{buildroot}%{_datadir}/applications/%{name}.desktop
 
+appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/terminatorX.appdata.xml
 
 %post
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-scrollkeeper-update -q -o %{_datadir}/omf/%{name} || :
+/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %postun
 if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null
+    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
-scrollkeeper-update -q || :
 
 %posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %files
-%doc AUTHORS ChangeLog COPYING* NEWS README* THANKS TODO 
+%doc AUTHORS ChangeLog NEWS README* THANKS TODO
+%license COPYING*
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/mime-info/%{name}.keys
 %{_datadir}/mime-info/%{name}.mime
 %{_datadir}/omf/*/*
-%{_datadir}/icons/hicolor/48x48/*/*png
+%{_datadir}/icons/hicolor/*/*/*png
 %{_datadir}/pixmaps/%{name}.xpm
+%{_datadir}/appdata/terminatorX.appdata.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/gnome/help/%{name}-manual/
 
 %changelog
+* Tue Jul 19 2016 Leigh Scott <leigh123linux@googlemail.com> - 4.0.0-1
+- Update to 4.0.0
+
 * Sat Dec 06 2014 Nicolas Chauvet <kwizart@gmail.com> - 3.90-3
 - Switch to mpg123
 
