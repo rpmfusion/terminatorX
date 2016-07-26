@@ -19,13 +19,13 @@ BuildRequires: ladspa-devel
 BuildRequires: libcap-devel
 BuildRequires: liblrdf-devel
 BuildRequires: libmad-devel
-BuildRequires: libvorbis-devel 
+BuildRequires: libvorbis-devel
 BuildRequires: libxml2-devel
-BuildRequires: libXxf86dga-devel 
+BuildRequires: libXxf86dga-devel
 BuildRequires: libmpg123-devel, mpg123
 BuildRequires: rarian-compat
 BuildRequires: sox
-BuildRequires: vorbis-tools 
+BuildRequires: vorbis-tools
 
 Requires:      hicolor-icon-theme
 Requires:      mpg123
@@ -34,7 +34,7 @@ Requires:      vorbis-tools
 
 %description
 terminatorX is a real-time audio synthesizer that allows you to "scratch" on
-digitally sampled audio data (*.wav, *.au, *.ogg, *.mp3, etc.) the way 
+digitally sampled audio data (*.wav, *.au, *.ogg, *.mp3, etc.) the way
 hiphop-DJs scratch on vinyl records. It features multiple turntables, real-time
 effects (buit-in as well as LADSPA plug-in effects), a sequencer and an
 easy-to-use gtk+ GUI.
@@ -136,20 +136,20 @@ fi
 * Wed Apr 01 2009 Orcan Ogetbil <oget[dot]fedora[at]gmail[dot]com> - 3.82-2
 - Prepared package for RPMFusion submission (originates from planetccrma)
 
-* Tue Dec 11 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
+* Tue Dec 11 2007 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu>
 - spec file cleanup
 
-* Wed Feb 16 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
+* Wed Feb 16 2005 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu>
 - declare do_save_tables before using it (for <= fc1)
 
 * Fri Dec 31 2004 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.82-1
 - updated to 3.82
 - update doc file list
 
-* Mon Dec 27 2004 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
+* Mon Dec 27 2004 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu>
 - spec file cleanup
 
-* Thu May 20 2004 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 
+* Thu May 20 2004 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu>
 - added build dependencies
 
 * Sun Feb 29 2004 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.81-2
@@ -158,7 +158,7 @@ fi
 * Mon Oct 20 2003 Patrice Tisserand <Patrice.Tisserand@ircam.fr> 3.81-1
 - updated for terminatorX-3.81
 - fixed building as non root user
-- still need to bez built with --define='_unpackaged_files_terminate_build 0', 
+- still need to bez built with --define='_unpackaged_files_terminate_build 0',
   don't knwo what to do with scrollkeeper
 
 * Wed May  7 2003 Fernando Lopez-Lezcano <nando@ccrma.stanford.edu> 3.80-1
