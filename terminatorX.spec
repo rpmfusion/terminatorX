@@ -1,6 +1,6 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       4.0.0
+Version:       4.0.1
 Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
@@ -92,6 +92,9 @@ fi
 %{_datadir}/gnome/help/%{name}-manual/
 
 %changelog
+* Tue Jul 26 2016 Adrian Reber <adrian@lisas.de> - 4.0.1-1
+- Update to 4.0.1
+
 * Tue Jul 19 2016 Leigh Scott <leigh123linux@googlemail.com> - 4.0.0-1
 - Update to 4.0.0
 - Change from gtk2 to gtk3
