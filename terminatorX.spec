@@ -11,8 +11,6 @@ BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
-BuildRequires: gnome-libs-devel
-BuildRequires: gnome-doc-utils
 BuildRequires: gtk3-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
@@ -21,11 +19,13 @@ BuildRequires: liblrdf-devel
 BuildRequires: libmad-devel
 BuildRequires: libvorbis-devel
 BuildRequires: libxml2-devel
-BuildRequires: libXxf86dga-devel
-BuildRequires: libmpg123-devel, mpg123
+BuildRequires: libX11-devel
+BuildRequires: mpg123
+BuildRequires: pulseaudio-libs-devel
 BuildRequires: rarian-compat
 BuildRequires: sox
 BuildRequires: vorbis-tools
+BuildRequires: gnome-doc-utils
 
 Requires:      hicolor-icon-theme
 Requires:      mpg123
@@ -36,8 +36,8 @@ Requires:      vorbis-tools
 terminatorX is a real-time audio synthesizer that allows you to "scratch" on
 digitally sampled audio data (*.wav, *.au, *.ogg, *.mp3, etc.) the way
 hiphop-DJs scratch on vinyl records. It features multiple turntables, real-time
-effects (buit-in as well as LADSPA plug-in effects), a sequencer and an
-easy-to-use gtk+ GUI.
+effects (buit-in as well as LADSPA plug-in effects), a sequencer and MIDI
+interface - all accessible through an easy-to-use gtk+ GUI.
 
 %prep
 %setup -q
@@ -46,7 +46,6 @@ easy-to-use gtk+ GUI.
 sed -i 's|/lib/|/%{_lib}/|g' src/tX_ladspa.cc
 
 %build
-export GREP_OPTIONS=
 %configure
 make %{?_smp_mflags}
 
@@ -84,16 +83,19 @@ fi
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/mime-info/%{name}.keys
 %{_datadir}/mime-info/%{name}.mime
-%{_datadir}/omf/*/*
-%{_datadir}/icons/hicolor/*/*/*png
-%{_datadir}/pixmaps/%{name}.xpm
-%{_datadir}/appdata/terminatorX.appdata.xml
-%{_datadir}/applications/%{name}.desktop
+%{_datadir}/omf/{%name}-manual/%{name}-manual-C.omf
 %{_datadir}/gnome/help/%{name}-manual/
+%{_datadir}/pixmaps/%{name}.xpm
+%{_datadir}/icons/hicolor/512x512/apps/%{name}.png
+%{_datadir}/icons/hicolor/512x512/mimetypes/%{name}-mime.png
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
 * Tue Jul 26 2016 Adrian Reber <adrian@lisas.de> - 4.0.1-1
 - Update to 4.0.1
+- Added pulseaudio-devel BR
+- Removed unneeded BRs
 
 * Tue Jul 19 2016 Leigh Scott <leigh123linux@googlemail.com> - 4.0.0-1
 - Update to 4.0.0
