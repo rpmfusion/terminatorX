@@ -11,6 +11,7 @@ BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
+BuildRequires: gcc
 BuildRequires: gtk3-devel
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
