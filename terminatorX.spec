@@ -1,7 +1,7 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
 Version:       4.0.1
-Release:       6%{?dist}
+Release:       7%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
@@ -92,6 +92,9 @@ fi
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Mon Mar 04 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 4.0.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Sun Aug 19 2018 Leigh Scott <leigh123linux@googlemail.com> - 4.0.1-6
 - Rebuilt for Fedora 29 Mass Rebuild binutils issue
 
