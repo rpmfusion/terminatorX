@@ -1,11 +1,11 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       4.0.1
-Release:       12%{?dist}
+Version:       4.1.0
+Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
 URL:           http://terminatorx.org/
-Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.bz2
+Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.gz
 
 BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
@@ -13,6 +13,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: libappstream-glib
 BuildRequires: gcc-c++
 BuildRequires: gtk3-devel
+BuildRequires: itstool
 BuildRequires: jack-audio-connection-kit-devel
 BuildRequires: ladspa-devel
 BuildRequires: libcap-devel
@@ -23,10 +24,8 @@ BuildRequires: libxml2-devel
 BuildRequires: libX11-devel
 BuildRequires: mpg123
 BuildRequires: pulseaudio-libs-devel
-BuildRequires: rarian-compat
 BuildRequires: sox
 BuildRequires: vorbis-tools
-BuildRequires: gnome-doc-utils
 
 Requires:      hicolor-icon-theme
 Requires:      mpg123
@@ -84,8 +83,7 @@ fi
 %{_mandir}/man1/%{name}.1*
 %{_datadir}/mime-info/%{name}.keys
 %{_datadir}/mime-info/%{name}.mime
-%{_datadir}/omf/{%name}-manual/%{name}-manual-C.omf
-%{_datadir}/gnome/help/%{name}-manual/
+%{_datadir}/help/C/%{name}-manual/
 %{_datadir}/pixmaps/%{name}.xpm
 %{_datadir}/icons/hicolor/512x512/apps/%{name}.png
 %{_datadir}/icons/hicolor/512x512/mimetypes/%{name}-mime.png
@@ -93,6 +91,9 @@ fi
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Sat Oct 30 2021 Orcan Ogetbil <oged[DOT]fedora[AT]gmail[DOT]com> - 4.1.0-1
+- Version updae
+
 * Tue Aug 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 4.0.1-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
