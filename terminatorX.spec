@@ -1,11 +1,11 @@
 Summary:       Real-time Audio Synthesizer
 Name:          terminatorX
-Version:       4.1.0
-Release:       3%{?dist}
+Version:       4.2.0
+Release:       1%{?dist}
 Group:         Applications/Multimedia
 License:       GPLv2+ and GFDL
-URL:           http://terminatorx.org/
-Source0:       http://terminatorx.org/dist/%{name}-%{version}.tar.gz
+URL:           https://terminatorx.org/
+Source0:       %url/dist/%{name}-%{version}.tar.gz
 
 BuildRequires: alsa-lib-devel
 BuildRequires: audiofile-devel
@@ -47,10 +47,10 @@ sed -i 's|/lib/|/%{_lib}/|g' src/tX_ladspa.cc
 
 %build
 %configure
-make %{?_smp_mflags}
+%make_build
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 
 # desktop file categories
 ADD="Audio X-Jack X-DJTools X-DigitalProcessing Sequencer"
@@ -61,23 +61,10 @@ desktop-file-install \
   `for c in ${REMOVE} ; do echo "--remove-category $c " ; done` \
   %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/terminatorX.appdata.xml
-
-%post
-/bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-if [ $1 -eq 0 ] ; then
-    /bin/touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    /usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-fi
-
-%posttrans
-/usr/bin/gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
+appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/appdata/%{name}.appdata.xml
 
 %files
-%doc AUTHORS ChangeLog NEWS README* THANKS TODO
+%doc ChangeLog NEWS README*
 %license COPYING*
 %{_bindir}/%{name}
 %{_mandir}/man1/%{name}.1*
@@ -91,6 +78,9 @@ fi
 %{_datadir}/appdata/%{name}.appdata.xml
 
 %changelog
+* Sat Oct 01 2022 Leigh Scott <leigh123linux@gmail.com> - 4.2.0-1
+- Update to 4.2.0
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 4.1.0-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
